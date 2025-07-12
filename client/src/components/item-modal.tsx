@@ -2,6 +2,7 @@ import { useState } from "react";
 import { X, Plus, Minus } from "lucide-react";
 import { useCart } from "@/contexts/cart-context";
 import { useToast } from "@/hooks/use-toast";
+import { formatIDRSimple } from "@/lib/currency";
 import type { MenuItem } from "@shared/schema";
 
 interface ItemModalProps {
@@ -107,7 +108,7 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
             <div className="flex justify-between items-center mb-4">
               <span className="text-lg font-semibold">Total:</span>
               <span className="text-xl font-bold text-coffee-brown">
-                ${total.toFixed(2)}
+                {formatIDRSimple(total)}
               </span>
             </div>
 

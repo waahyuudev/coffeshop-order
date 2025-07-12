@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useCart } from "@/contexts/cart-context";
 import { useToast } from "@/hooks/use-toast";
+import { formatIDRSimple } from "@/lib/currency";
 import type { MenuItem } from "@shared/schema";
 
 interface MenuProps {
@@ -115,7 +116,7 @@ export default function Menu({ onItemClick }: MenuProps) {
                 <p className="text-gray-600 text-sm mb-4">{item.description}</p>
                 <div className="flex justify-between items-center">
                   <span className="text-xl font-bold text-coffee-brown">
-                    ${parseFloat(item.price).toFixed(2)}
+                    {formatIDRSimple(parseFloat(item.price))}
                   </span>
                   <button
                     onClick={(e) => handleQuickAdd(item, e)}

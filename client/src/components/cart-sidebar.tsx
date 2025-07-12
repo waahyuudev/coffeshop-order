@@ -1,6 +1,7 @@
 import { X, ShoppingCart, Trash2, Plus, Minus } from "lucide-react";
 import { useCart } from "@/contexts/cart-context";
 import { useToast } from "@/hooks/use-toast";
+import { formatIDRSimple } from "@/lib/currency";
 
 interface CartSidebarProps {
   isOpen: boolean;
@@ -74,7 +75,7 @@ export default function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebar
                   <div className="flex-1">
                     <h4 className="font-semibold text-dark-coffee">{item.name}</h4>
                     <p className="text-sm text-gray-600">
-                      ${item.price.toFixed(2)} each
+                      {formatIDRSimple(item.price)} each
                     </p>
                     {item.notes && (
                       <p className="text-xs text-gray-500 italic">{item.notes}</p>
@@ -82,7 +83,7 @@ export default function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebar
                   </div>
                   <div className="flex flex-col items-end space-y-2">
                     <span className="font-semibold text-coffee-brown">
-                      ${(item.price * item.quantity).toFixed(2)}
+                      {formatIDRSimple(item.price * item.quantity)}
                     </span>
                     <div className="flex items-center space-x-2">
                       <button
@@ -116,7 +117,7 @@ export default function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebar
           <div className="flex justify-between items-center mb-4">
             <span className="text-lg font-semibold">Total:</span>
             <span className="text-xl font-bold text-coffee-brown">
-              ${total.toFixed(2)}
+              {formatIDRSimple(total)}
             </span>
           </div>
           <button

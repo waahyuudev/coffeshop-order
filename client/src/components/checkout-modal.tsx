@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useCart } from "@/contexts/cart-context";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import { formatIDRSimple } from "@/lib/currency";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -208,14 +209,14 @@ export default function CheckoutModal({ isOpen, onClose, onSuccess }: CheckoutMo
                   {cart.map((item) => (
                     <div key={item.id} className="flex justify-between">
                       <span>{item.name} x {item.quantity}</span>
-                      <span>${(item.price * item.quantity).toFixed(2)}</span>
+                      <span>{formatIDRSimple(item.price * item.quantity)}</span>
                     </div>
                   ))}
                 </div>
                 <div className="flex justify-between items-center mt-4 pt-4 border-t">
                   <span className="font-semibold">Total:</span>
                   <span className="text-lg font-bold text-coffee-brown">
-                    ${total.toFixed(2)}
+                    {formatIDRSimple(total)}
                   </span>
                 </div>
               </div>
