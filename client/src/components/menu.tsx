@@ -31,7 +31,7 @@ export default function Menu({ onItemClick }: MenuProps) {
   const handleQuickAdd = (item: MenuItem, e: React.MouseEvent) => {
     e.stopPropagation();
     addToCart({
-      id: item.id,
+      id: item.id.toString(),
       name: item.name,
       price: parseFloat(item.price),
       quantity: 1,
