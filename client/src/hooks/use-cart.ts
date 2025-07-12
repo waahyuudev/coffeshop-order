@@ -13,20 +13,28 @@ export function useCart() {
   const [cart, setCart] = useState<CartItem[]>([]);
 
   const addToCart = useCallback((item: CartItem) => {
+    console.log('useCart: Adding item to cart:', item);
     setCart(prevCart => {
+      console.log('useCart: Current cart:', prevCart);
       const existingItem = prevCart.find(cartItem => 
         cartItem.id === item.id && cartItem.notes === item.notes
       );
 
       if (existingItem) {
-        return prevCart.map(cartItem =>
+        console.log('useCart: Found existing item, updating quantity');
+        const newCart = prevCart.map(cartItem =>
           cartItem.id === item.id && cartItem.notes === item.notes
             ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
             : cartItem
         );
+        console.log('useCart: New cart after update:', newCart);
+        return newCart;
       }
 
-      return [...prevCart, item];
+      console.log('useCart: Adding new item to cart');
+      const newCart = [...prevCart, item];
+      console.log('useCart: New cart after add:', newCart);
+      return newCart;
     });
   }, []);
 

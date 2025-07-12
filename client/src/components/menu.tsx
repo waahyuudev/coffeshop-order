@@ -30,14 +30,17 @@ export default function Menu({ onItemClick }: MenuProps) {
 
   const handleQuickAdd = (item: MenuItem, e: React.MouseEvent) => {
     e.stopPropagation();
-    addToCart({
+    console.log('Adding item to cart:', item);
+    const cartItem = {
       id: item.id.toString(),
       name: item.name,
       price: parseFloat(item.price),
       quantity: 1,
       notes: "",
       image: item.image,
-    });
+    };
+    console.log('Cart item:', cartItem);
+    addToCart(cartItem);
     toast({
       title: "Added to cart!",
       description: `${item.name} has been added to your cart.`,
