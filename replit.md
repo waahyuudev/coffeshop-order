@@ -121,4 +121,4 @@ Preferred communication style: Simple, everyday language.
 - **CORS**: Configured for cross-origin requests in development
 - **Static Assets**: Express serves built frontend from production bundle
 
-The application uses a storage abstraction layer (`IStorage` interface) that has been implemented with PostgreSQL database storage using Drizzle ORM. The database is fully configured with menu items, orders, and order items tables.
+The application uses a storage abstraction layer (`IStorage` interface) that currently has an in-memory implementation for development, but is designed to be easily swapped with the PostgreSQL implementation using Drizzle ORM.
