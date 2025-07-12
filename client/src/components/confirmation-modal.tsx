@@ -1,5 +1,6 @@
 import { CheckCircle, X } from "lucide-react";
 import { useCart } from "@/contexts/cart-context";
+import { formatIDRSimple } from "@/lib/currency";
 
 interface ConfirmationModalProps {
   isOpen: boolean;
@@ -49,7 +50,7 @@ export default function ConfirmationModal({ isOpen, onClose, orderNumber }: Conf
                 <div className="flex justify-between">
                   <span className="font-semibold">Total:</span>
                   <span className="text-coffee-brown font-bold">
-                    ${total.toFixed(2)}
+                    {formatIDRSimple(total)}
                   </span>
                 </div>
               </div>

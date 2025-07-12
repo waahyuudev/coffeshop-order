@@ -68,7 +68,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         customerPhone: data.customerPhone,
         deliveryAddress: data.deliveryAddress || "",
         orderType: data.orderType,
-        total: total.toFixed(2),
+        total: Math.round(total).toString(),
         status: "pending"
       });
 
