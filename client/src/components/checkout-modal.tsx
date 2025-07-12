@@ -50,12 +50,13 @@ export default function CheckoutModal({ isOpen, onClose, onSuccess }: CheckoutMo
       const orderData = {
         ...data,
         items: cart.map(item => ({
-          menuItemId: parseInt(item.id.split('-')[0]),
+          menuItemId: parseInt(item.id),
           quantity: item.quantity,
           notes: item.notes || "",
         })),
       };
 
+      console.log('Order data being sent:', orderData);
       const response = await apiRequest("POST", "/api/orders", orderData);
       return response.json();
     },

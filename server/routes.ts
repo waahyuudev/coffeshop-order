@@ -46,6 +46,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/orders", async (req, res) => {
     try {
       const data = createOrderRequestSchema.parse(req.body);
+      console.log('Order request data:', data);
       
       // Calculate total
       let total = 0;
@@ -54,8 +55,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         if (!menuItem) {
           return res.status(400).json({ message: `Menu item ${item.menuItemId} not found` });
         }
+        console.log(`Menu item ${item.menuItemId}: price=${menuItem.price}, quantity=${item.quantity}`);
         total += parseFloat(menuItem.price) * item.quantity;
       }
+      console.log('Calculated total:', total);
 
       // Generate order number
       const orderNumber = `ORD-${Date.now()}`;
