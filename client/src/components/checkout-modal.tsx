@@ -27,7 +27,7 @@ type CheckoutForm = z.infer<typeof checkoutSchema>;
 interface CheckoutModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSuccess: (orderNumber: string) => void;
+  onSuccess: (orderNumber: string, total: number) => void;
 }
 
 export default function CheckoutModal({ isOpen, onClose, onSuccess }: CheckoutModalProps) {
@@ -56,7 +56,6 @@ export default function CheckoutModal({ isOpen, onClose, onSuccess }: CheckoutMo
         })),
       };
 
-      console.log('Order data being sent:', orderData);
       const response = await apiRequest("POST", "/api/orders", orderData);
       return response.json();
     },
@@ -65,8 +64,9 @@ export default function CheckoutModal({ isOpen, onClose, onSuccess }: CheckoutMo
         title: "Order placed successfully!",
         description: `Your order #${data.orderNumber} has been received.`,
       });
+      const total = parseFloat(data.order.total);
       clearCart();
-      onSuccess(data.orderNumber);
+      onSuccess(data.orderNumber, total);
     },
     onError: (error) => {
       toast({

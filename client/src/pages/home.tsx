@@ -15,6 +15,7 @@ export default function Home() {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [orderNumber, setOrderNumber] = useState<string>("");
+  const [orderTotal, setOrderTotal] = useState<number>(0);
 
   const { cart } = useCart();
 
@@ -22,8 +23,9 @@ export default function Home() {
     setSelectedItem(item);
   };
 
-  const handleCheckoutSuccess = (orderNum: string) => {
+  const handleCheckoutSuccess = (orderNum: string, total: number) => {
     setOrderNumber(orderNum);
+    setOrderTotal(total);
     setIsCheckoutOpen(false);
     setIsConfirmationOpen(true);
   };
@@ -70,6 +72,7 @@ export default function Home() {
         isOpen={isConfirmationOpen}
         onClose={() => setIsConfirmationOpen(false)}
         orderNumber={orderNumber}
+        orderTotal={orderTotal}
       />
     </div>
   );
