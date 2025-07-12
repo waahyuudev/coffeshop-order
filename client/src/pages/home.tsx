@@ -6,7 +6,7 @@ import CartSidebar from "@/components/cart-sidebar";
 import ItemModal from "@/components/item-modal";
 import CheckoutModal from "@/components/checkout-modal";
 import ConfirmationModal from "@/components/confirmation-modal";
-import { useCart } from "@/hooks/use-cart";
+import { useCart } from "@/contexts/cart-context";
 import type { MenuItem } from "@shared/schema";
 
 export default function Home() {

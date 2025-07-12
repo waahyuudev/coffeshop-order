@@ -1,5 +1,5 @@
 import { CheckCircle, X } from "lucide-react";
-import { useCart } from "@/hooks/use-cart";
+import { useCart } from "@/contexts/cart-context";
 
 interface ConfirmationModalProps {
   isOpen: boolean;

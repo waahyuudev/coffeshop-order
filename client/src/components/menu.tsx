@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useCart } from "@/hooks/use-cart";
+import { useCart } from "@/contexts/cart-context";
 import { useToast } from "@/hooks/use-toast";
 import type { MenuItem } from "@shared/schema";
 
@@ -30,17 +30,14 @@ export default function Menu({ onItemClick }: MenuProps) {
 
   const handleQuickAdd = (item: MenuItem, e: React.MouseEvent) => {
     e.stopPropagation();
-    console.log('Adding item to cart:', item);
-    const cartItem = {
+    addToCart({
       id: item.id.toString(),
       name: item.name,
       price: parseFloat(item.price),
       quantity: 1,
       notes: "",
       image: item.image,
-    };
-    console.log('Cart item:', cartItem);
-    addToCart(cartItem);
+    });
     toast({
       title: "Added to cart!",
       description: `${item.name} has been added to your cart.`,

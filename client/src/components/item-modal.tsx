@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { X, Plus, Minus } from "lucide-react";
-import { useCart } from "@/hooks/use-cart";
+import { useCart } from "@/contexts/cart-context";
 import { useToast } from "@/hooks/use-toast";
 import type { MenuItem } from "@shared/schema";
 

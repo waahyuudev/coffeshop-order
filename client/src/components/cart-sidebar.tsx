@@ -1,5 +1,5 @@
 import { X, ShoppingCart, Trash2 } from "lucide-react";
-import { useCart } from "@/hooks/use-cart";
+import { useCart } from "@/contexts/cart-context";
 import { useToast } from "@/hooks/use-toast";
 
 interface CartSidebarProps {
