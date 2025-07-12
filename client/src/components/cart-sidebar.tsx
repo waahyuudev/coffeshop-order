@@ -1,4 +1,4 @@
-import { X, ShoppingCart, Trash2 } from "lucide-react";
+import { X, ShoppingCart, Trash2, Plus, Minus } from "lucide-react";
 import { useCart } from "@/contexts/cart-context";
 import { useToast } from "@/hooks/use-toast";
 
@@ -9,7 +9,7 @@ interface CartSidebarProps {
 }
 
 export default function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebarProps) {
-  const { cart, removeFromCart } = useCart();
+  const { cart, removeFromCart, updateQuantity } = useCart();
   const { toast } = useToast();
 
   const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -20,6 +20,14 @@ export default function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebar
       title: "Item removed",
       description: "Item has been removed from your cart.",
     });
+  };
+
+  const handleQuantityChange = (id: string, newQuantity: number) => {
+    if (newQuantity <= 0) {
+      handleRemoveItem(id);
+    } else {
+      updateQuantity(id, newQuantity);
+    }
   };
 
   return (
@@ -66,22 +74,37 @@ export default function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebar
                   <div className="flex-1">
                     <h4 className="font-semibold text-dark-coffee">{item.name}</h4>
                     <p className="text-sm text-gray-600">
-                      ${item.price.toFixed(2)} x {item.quantity}
+                      ${item.price.toFixed(2)} each
                     </p>
                     {item.notes && (
                       <p className="text-xs text-gray-500 italic">{item.notes}</p>
                     )}
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex flex-col items-end space-y-2">
                     <span className="font-semibold text-coffee-brown">
                       ${(item.price * item.quantity).toFixed(2)}
                     </span>
-                    <button
-                      onClick={() => handleRemoveItem(item.id)}
-                      className="text-red-500 hover:text-red-700"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
+                    <div className="flex items-center space-x-2">
+                      <button
+                        onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
+                        className="w-8 h-8 flex items-center justify-center bg-gray-200 text-gray-600 rounded hover:bg-gray-300 transition-colors"
+                      >
+                        <Minus className="h-4 w-4" />
+                      </button>
+                      <span className="w-8 text-center font-semibold">{item.quantity}</span>
+                      <button
+                        onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
+                        className="w-8 h-8 flex items-center justify-center bg-coffee-brown text-white rounded hover:bg-chocolate-orange transition-colors"
+                      >
+                        <Plus className="h-4 w-4" />
+                      </button>
+                      <button
+                        onClick={() => handleRemoveItem(item.id)}
+                        className="w-8 h-8 flex items-center justify-center text-red-500 hover:text-red-700 hover:bg-red-50 rounded transition-colors"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
