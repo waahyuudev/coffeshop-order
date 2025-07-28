@@ -25,11 +25,13 @@
   --radius: 0.5rem;
   
   /* Coffee theme colors */
-  --coffee-brown: hsl(20, 66%, 28%);
+  /*--coffee-brown: hsl(20, 66%, 28%);*/
+  --coffee-brown: hsl(155, 36%, 17%);
   --chocolate-orange: hsl(25, 77%, 46%);
   --sandy-brown: hsl(32, 83%, 67%);
   --coffee-beige: hsl(60, 56%, 93%);
-  --dark-coffee: hsl(25, 38%, 13%);
+  /*--dark-coffee: hsl(25, 38%, 13%);*/
+  --dark-coffee: hsl(155, 36%, 17%);
 }
 
 .dark {

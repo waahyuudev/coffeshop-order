@@ -12,7 +12,7 @@ export default function Header({ cartCount, onCartClick }: HeaderProps) {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Coffee className="text-coffee-brown text-2xl mr-2" />
-            <h1 className="text-2xl font-bold text-dark-coffee">Brew & Bean</h1>
+            <h1 className="text-2xl font-bold text-dark-coffee">Senada</h1>
           </div>
           
           <nav className="hidden md:flex space-x-8">
