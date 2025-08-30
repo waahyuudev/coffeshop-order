@@ -64,7 +64,7 @@ app.use((req, res, next) => {
   server.listen({
     port,
     // host: "0.0.0.0",
-    host: "192.168.100.32",
+    host: "192.168.100.32", // ubah sesuai ip yang ada di local
     reusePort: true,
   }, () => {
     log(`serving on port ${port}`);

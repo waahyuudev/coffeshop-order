@@ -27,6 +27,8 @@ const categories = [
   { id: "non-coffee", name: "Non-Coffee" },
 ];
 
+const baseApi = "http://192.168.100.32:8000"
+
 export default function Menu({ onItemClick }: MenuProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const { addToCart } = useCart();
@@ -36,7 +38,7 @@ export default function Menu({ onItemClick }: MenuProps) {
   const { data: menuItems = [], isLoading, error } = useQuery<MenuItem[]>({
     queryKey: ["/api/menu"],
     queryFn: async (): Promise<MenuItem[]> => {
-      const response = await fetch("http://192.168.100.32:8000/api/customer/menu-list");
+      const response = await fetch(`${baseApi}/api/customer/menu-list`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -48,7 +50,7 @@ export default function Menu({ onItemClick }: MenuProps) {
         description: item.description || "No description available", // Default description if null
         category: item.category as "food" | "coffee" | "non-coffee", // Explicit type casting
         price: parseFloat(item.price), // Convert price to number
-        image: `http://192.168.100.32:8000/storage/${item.image_path}`, // Build the full image URL
+        image: `${baseApi}/storage/${item.image_path}`, // Build the full image URL
       }));
     },
   });
