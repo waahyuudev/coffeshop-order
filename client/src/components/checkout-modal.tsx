@@ -1,5 +1,6 @@
 import { X } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { useSearchParams } from "wouter";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMutation } from "@tanstack/react-query";
@@ -58,10 +59,14 @@ export default function CheckoutModal({
   const { cart, clearCart } = useCart();
   const { toast } = useToast();
 
+    // 2. Ambil nilai dari query parameter URL
+    const [searchParams] = useSearchParams();
+    const tableNo = searchParams.get('table_no'); // Berhasil!
+
   const form = useForm<CheckoutForm>({
     resolver: zodResolver(checkoutSchema),
     defaultValues: {
-      tableNumber: 1,
+      tableNumber: tableNo ? parseInt(tableNo, 10) : 1,
       customerName: "",
       customerPhone: "",
       channelPayment: "cash",
@@ -82,7 +87,7 @@ export default function CheckoutModal({
         })),
       };
 
-      const res = await fetch("http://127.0.0.1:8000/api/customer/submit-order", {
+      const res = await fetch("http://192.168.100.32:8000/api/customer/submit-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderPayload),
