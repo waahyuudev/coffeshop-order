@@ -87,7 +87,7 @@ export default function CheckoutModal({
         })),
       };
 
-      const res = await fetch("http://192.168.100.32:8000/api/customer/submit-order", {
+      const res = await fetch("https://dashboard.senadacoffee.my.id/api/customer/submit-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderPayload),

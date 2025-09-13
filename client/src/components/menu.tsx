@@ -27,7 +27,7 @@ const categories = [
   { id: "non-coffee", name: "Non-Coffee" },
 ];
 
-const baseApi = "http://192.168.100.32:8000"
+const baseApi = "https://dashboard.senadacoffee.my.id"
 
 export default function Menu({ onItemClick }: MenuProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
